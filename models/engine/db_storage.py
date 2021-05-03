@@ -40,14 +40,13 @@ class DBStorage:
         """ query on current db session (self.__session) all obj depending
         on class name (arg cls) """
         all_objs = {}
-        for i in classes:  # iterate through our known classes
-            # if cls name is a match (or if none is passed)
-            if cls is None or cls == i:
-                objects = self.__session.query(classes[i]).all()
-                for obj in objects:  # we now return a dict.. <classname>.<id>
-                    key = obj.__class__.__name__ + "." + obj.id
+        for clss in classes:
+            if cls is None or cls is classes[clss] or cls is clss:
+                objs = self.__session.query(classes[clss]).all()
+                for obj in objs:
+                    key = obj.__class__.__name__ + '.' + obj.id
                     all_objs[key] = obj
-        return(all_objs)
+        return (all_objs)
 
     def new(self, obj):
         """add the object to the current database session (self.__session)"""
@@ -77,4 +76,5 @@ class DBStorage:
 
     def close(self):
         """ close session """
-        self.__session.close()
+        if self.__session:
+            self.__session.close()
