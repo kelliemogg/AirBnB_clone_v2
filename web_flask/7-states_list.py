@@ -20,7 +20,7 @@ classes = {"Amenity": Amenity, "City": City,
 
 @app.route('/states_list', strict_slashes=False)
 def states_list():
-    """ display HTML page with list of states """
+    """ displays list of states via HTML doc """
     states = storage.all(classes["State"]).values()
     # ^ fetches States data from storage engine, then in line below,
     # those states are passed into the template
@@ -28,8 +28,8 @@ def states_list():
 
 
 @app.teardown_appcontext
-def remove_SQLalc_session(exception):
-    """ close storage when tear down occurs """
+def remove_SQLalc(exception):
+    """ close SQLalc after each request """
     storage.close()
 
 if __name__ == '__main__':
