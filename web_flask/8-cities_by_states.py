@@ -1,8 +1,6 @@
 #!/usr/bin/python3
-""" this module contains a script that starts a Flask web application
-    the web application must be listening on 0.0.0.0, port 5000
-    Routes:
-    - /states_list
+""" starts a Flask web application
+    listening on 0.0.0.0, port 5000
 """
 from models import *
 from models.base_model import BaseModel, Base
@@ -20,16 +18,15 @@ classes = {"Amenity": Amenity, "City": City,
 
 @app.route('/cities_by_states', strict_slashes=False)
 def cities_by_states():
-    """ display HTML page with list of cities """
+    """ displays list of states via HTML doc """
     states = storage.all(classes["State"]).values()
-    # ^ fetches states data from storage engine, then in line below,
-    # those states are passed into the template
+    # gets data from db / passes them into the html template
     return render_template('8-cities_by_states.html', states=states)
 
 
 @app.teardown_appcontext
-def remove_SQLalc_session(exception):
-    """ close storage when tear down occurs """
+def remove_SQLalc(exception):
+    """ close SQLalc after each request """
     storage.close()
 
 if __name__ == '__main__':

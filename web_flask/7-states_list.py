@@ -22,8 +22,7 @@ classes = {"Amenity": Amenity, "City": City,
 def states_list():
     """ displays list of states via HTML doc """
     states = storage.all(classes["State"]).values()
-    # ^ fetches States data from storage engine, then in line below,
-    # those states are passed into the template
+    # gets data from db / passes them into the html template
     return render_template('7-states_list.html', states=states)
 
 
