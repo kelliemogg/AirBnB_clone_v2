@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-""" starts a Flask web application
-    listening on 0.0.0.0, port 5000
-"""
+""" states a flask app and displays states and cities """
 from models import *
 from models.base_model import BaseModel, Base
 from models.user import User
@@ -18,7 +16,7 @@ classes = {"Amenity": Amenity, "City": City,
 
 @app.route('/states', strict_slashes=False)
 @app.route('/states/<id>', strict_slashes=False)
-def by_states_od():
+def by_states_id(id=None):
     """ displays city and state info """
     the_states = storage.all(State)
     if id:
