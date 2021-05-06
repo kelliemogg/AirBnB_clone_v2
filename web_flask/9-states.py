@@ -25,6 +25,7 @@ def by_states_id(id=None):
         states = the_states.values()
     return render_template('9-states.html', states=states)
 
+
 @app.teardown_appcontext
 def remove_SQLalc(exception):
     """ close SQLalc after each request """
