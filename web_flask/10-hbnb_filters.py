@@ -16,12 +16,14 @@ classes = {"Amenity": Amenity, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
 
 
-@app.route('/cities_by_states', strict_slashes=False)
-def cities_by_states():
-    """ displays list of states via HTML doc """
-    states = storage.all(classes["State"]).values()
+@app.route('/hbnb_filters', strict_slashes=False)
+def hbnb_filters():
+    """ display city and state data """
+    allstates = storage.all(State).values()
+    amenities = storage.all(Amenities).values()
     # gets data from db / passes them into the html template
-    return render_template('8-cities_by_states.html', states=states)
+    return render_template('10-hbnb_filters.html', states=states,
+                            amenities=amenities)
 
 
 @app.teardown_appcontext
